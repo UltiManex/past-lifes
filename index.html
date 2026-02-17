@@ -9,10 +9,11 @@
   <body>
     <main class="app-shell">
       <header class="app-header">
-        <p class="eyebrow">Text Strategy Simulator</p>
+        <p class="eyebrow">Narrative Strategy Simulator</p>
         <h1>Past Lifes</h1>
         <p class="subtitle">
-          Follow the echoes of your choices to discover who you were before.
+          Every decision stirs an old memory. Chase the clues, earn Echo Shards,
+          and uncover the person you once were.
         </p>
       </header>
 
@@ -26,6 +27,8 @@
           <p id="sceneText"></p>
         </div>
       </section>
+
+      <section class="story-beat" id="storyBeat"></section>
 
       <section class="choices" id="choices"></section>
 
@@ -51,6 +54,12 @@
         <button id="restartBtn" class="secondary">Restart Run</button>
       </footer>
     </main>
+
+    <aside id="tutorialToast" class="tutorial-toast hidden" role="status" aria-live="polite">
+      <h4 id="tutorialTitle"></h4>
+      <p id="tutorialText"></p>
+      <button id="tutorialDismiss" class="secondary">Got it</button>
+    </aside>
 
     <script src="app.js"></script>
   </body>

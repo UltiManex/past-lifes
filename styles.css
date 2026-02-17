@@ -1,13 +1,12 @@
 :root {
   color-scheme: dark;
-  --bg: #13111f;
-  --card: #1f1b31;
-  --card-soft: #282244;
-  --text: #f4f2ff;
-  --muted: #b7b3d1;
-  --accent: #bb86fc;
-  --accent-2: #7ad7f0;
-  --danger: #ff8ea3;
+  --bg: #110f1f;
+  --card: #1f1936;
+  --card-soft: #2a2246;
+  --text: #f7f4ff;
+  --muted: #c0b8e6;
+  --accent: #c18bff;
+  --accent-2: #72e7f8;
 }
 
 * {
@@ -18,12 +17,12 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at top, #281f44, var(--bg) 62%);
+  background: radial-gradient(circle at 10% 0%, #3f2a72 0%, #1a1630 38%, var(--bg) 80%);
   color: var(--text);
 }
 
 .app-shell {
-  width: min(960px, 100%);
+  width: min(980px, 100%);
   margin: 0 auto;
   padding: 1rem;
   display: grid;
@@ -36,11 +35,13 @@ body {
 .end-screen,
 .status-grid,
 .app-footer,
-.choices {
-  background: color-mix(in srgb, var(--card) 92%, black);
+.choices,
+.story-beat {
+  background: linear-gradient(160deg, color-mix(in srgb, var(--card) 95%, black), #17132a);
   border-radius: 16px;
   padding: 1rem;
-  border: 1px solid #392f64;
+  border: 1px solid #4f3f83;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
 }
 
 .eyebrow {
@@ -54,8 +55,14 @@ body {
 h1,
 h2,
 h3,
+h4,
 p {
   margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0.4rem;
+  text-shadow: 0 0 20px rgba(193, 139, 255, 0.3);
 }
 
 .subtitle {
@@ -70,13 +77,17 @@ p {
 }
 
 .stat-card {
-  background: var(--card-soft);
+  background: linear-gradient(180deg, var(--card-soft), #241e40);
   border-radius: 12px;
-  padding: 0.5rem;
+  padding: 0.55rem;
 }
 
 .stat-card small {
   color: var(--muted);
+}
+
+.stat-card p {
+  margin: 0.15rem 0 0;
 }
 
 .scene-card {
@@ -89,13 +100,18 @@ p {
 .scene-card img {
   width: 100%;
   border-radius: 12px;
-  border: 1px solid #463876;
+  border: 1px solid #5f4b9f;
 }
 
 .scene-kicker {
   color: var(--accent-2);
   margin-bottom: 0.25rem;
   font-size: 0.82rem;
+}
+
+.story-beat {
+  border-left: 3px solid var(--accent-2);
+  color: #e6ddff;
 }
 
 .choices {
@@ -106,7 +122,7 @@ p {
 button {
   border: 1px solid transparent;
   border-radius: 12px;
-  background: linear-gradient(135deg, #8f66d8, #5b9ad0);
+  background: linear-gradient(135deg, #9d6ef0, #61a9db);
   color: #fff;
   font-weight: 600;
   padding: 0.75rem;
@@ -119,7 +135,7 @@ button {
 
 button.secondary {
   background: transparent;
-  border-color: #5f5094;
+  border-color: #6c5ca7;
   color: var(--muted);
 }
 
@@ -137,7 +153,8 @@ button:hover {
   gap: 0.3rem;
 }
 
-.end-screen.hidden {
+.end-screen.hidden,
+.tutorial-toast.hidden {
   display: none;
 }
 
@@ -145,7 +162,7 @@ button:hover {
   padding: 1rem;
   border-radius: 12px;
   background: var(--card-soft);
-  border: 1px solid #54418f;
+  border: 1px solid #5f4ba0;
   margin-bottom: 1rem;
 }
 
@@ -154,6 +171,24 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
+}
+
+.tutorial-toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  width: min(340px, calc(100vw - 2rem));
+  background: #211a3a;
+  border: 1px solid #7f68c6;
+  border-radius: 14px;
+  padding: 0.8rem;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  z-index: 20;
+}
+
+.tutorial-toast h4 {
+  color: var(--accent-2);
+  margin-bottom: 0.3rem;
 }
 
 @media (max-width: 680px) {

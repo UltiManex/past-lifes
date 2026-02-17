@@ -4,11 +4,13 @@ Past Lifes is a lightweight text-and-image strategy simulator where each run pla
 
 ## Features
 
-- New randomized scenario each run
-- Choice-driven trait system that shapes final identity reveal
+- New randomized scenario each run with stronger narrative openings
+- Adaptive choice generation that avoids recent repeats and responds to your leading trait
+- Story-beat panel that explains what your previous choice caused before new options appear
 - Variable-ratio random reinforcement rewards (Echo Shards)
+- First-run explainer toasts for key systems (clues, health, rewards, saves)
+- Rich past-life reveal with name, birth year, era, likes, events, and regrets tied to defining trait
 - Save/load using localStorage
-- Endings for discovery or death
 - Mobile-friendly single-page interface
 
 ## Run (Windows, macOS, Linux)
@@ -29,7 +31,3 @@ npm run start
 ```bash
 npm run check
 ```
-
-## Why your command failed on Windows
-
-You tried `python3 -m http.server 4173`, but your machine doesn't have Python installed/in PATH. This project now includes a Node-based server (`npm run start`), so you can run it with the Node setup you already have.
