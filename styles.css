@@ -1,0 +1,168 @@
+:root {
+  color-scheme: dark;
+  --bg: #13111f;
+  --card: #1f1b31;
+  --card-soft: #282244;
+  --text: #f4f2ff;
+  --muted: #b7b3d1;
+  --accent: #bb86fc;
+  --accent-2: #7ad7f0;
+  --danger: #ff8ea3;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #281f44, var(--bg) 62%);
+  color: var(--text);
+}
+
+.app-shell {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.app-header,
+.scene-card,
+.log-panel,
+.end-screen,
+.status-grid,
+.app-footer,
+.choices {
+  background: color-mix(in srgb, var(--card) 92%, black);
+  border-radius: 16px;
+  padding: 1rem;
+  border: 1px solid #392f64;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--accent-2);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.6rem;
+}
+
+.stat-card {
+  background: var(--card-soft);
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+
+.stat-card small {
+  color: var(--muted);
+}
+
+.scene-card {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 180px 1fr;
+  align-items: center;
+}
+
+.scene-card img {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid #463876;
+}
+
+.scene-kicker {
+  color: var(--accent-2);
+  margin-bottom: 0.25rem;
+  font-size: 0.82rem;
+}
+
+.choices {
+  display: grid;
+  gap: 0.65rem;
+}
+
+button {
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #8f66d8, #5b9ad0);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.75rem;
+  cursor: pointer;
+}
+
+.choice-btn {
+  text-align: left;
+}
+
+button.secondary {
+  background: transparent;
+  border-color: #5f5094;
+  color: var(--muted);
+}
+
+button:hover {
+  filter: brightness(1.1);
+}
+
+.log-panel ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--muted);
+  max-height: 220px;
+  overflow: auto;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.end-screen.hidden {
+  display: none;
+}
+
+#identityCard {
+  padding: 1rem;
+  border-radius: 12px;
+  background: var(--card-soft);
+  border: 1px solid #54418f;
+  margin-bottom: 1rem;
+}
+
+.end-actions,
+.app-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+@media (max-width: 680px) {
+  .scene-card {
+    grid-template-columns: 1fr;
+  }
+
+  .scene-card img {
+    max-height: 220px;
+    object-fit: cover;
+  }
+}
