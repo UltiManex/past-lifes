@@ -11,10 +11,25 @@ Past Lifes is a lightweight text-and-image strategy simulator where each run pla
 - Endings for discovery or death
 - Mobile-friendly single-page interface
 
-## Run
+## Run (Windows, macOS, Linux)
+
+No Python is required.
+
+1. Open a terminal in the project folder.
+2. Run:
 
 ```bash
-python3 -m http.server 4173
+npm run start
 ```
 
-Then open `http://localhost:4173`.
+3. Open `http://localhost:4173` in your browser.
+
+## Quick checks
+
+```bash
+npm run check
+```
+
+## Why your command failed on Windows
+
+You tried `python3 -m http.server 4173`, but your machine doesn't have Python installed/in PATH. This project now includes a Node-based server (`npm run start`), so you can run it with the Node setup you already have.
