@@ -1,15 +1,15 @@
 # Past Lifes
 
-Past Lifes is a lightweight text-and-image strategy simulator where each run places the player in a different historical (or speculative) scenario. Through branching choices, players accrue clues and Echo Shards to uncover who they were in a prior life.
+Past Lifes is a lightweight text-and-image strategy simulator where each run places the player in a historically grounded scenario. Your choices are explicit to the current story and directly determine the next scene.
 
 ## Features
 
-- New randomized scenario each run with stronger narrative openings
-- Adaptive choice generation that avoids recent repeats and responds to your leading trait
-- Story-beat panel that explains what your previous choice caused before new options appear
+- Branching historical storylines tied to real events (for example, wartime Switzerland and 1989 East Germany)
+- Scene-specific choices (no generic repeated option sets)
+- Full narrative consequences after every action before the next choices appear
+- Endings with named identities, birth date, era, life details, good/bad events, and regrets
 - Variable-ratio random reinforcement rewards (Echo Shards)
-- First-run explainer toasts for key systems (clues, health, rewards, saves)
-- Rich past-life reveal with name, birth year, era, likes, events, and regrets tied to defining trait
+- First-run tutorial toasts for key systems
 - Save/load using localStorage
 - Mobile-friendly single-page interface
 
