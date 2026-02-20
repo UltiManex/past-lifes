@@ -1,4 +1,4 @@
-const STORAGE_KEY = "past-lifes-save-v3";
+const STORAGE_KEY = "past-lifes-save-v4";
 const TUTORIAL_KEY = "past-lifes-tutorial-seen-v1";
 
 const scenarios = [
@@ -522,23 +522,43 @@ const scenarios = [
   },
 ];
 
-const baseState = () => {
-  const scenario = structuredClone(scenarios[Math.floor(Math.random() * scenarios.length)]);
+function pickScenario(previousRecent = [], avoidScenarioId = "") {
+  const unseen = scenarios.filter(
+    (scenario) => scenario.id !== avoidScenarioId && !previousRecent.includes(scenario.id)
+  );
+  const differentFromCurrent = scenarios.filter((scenario) => scenario.id !== avoidScenarioId);
+  const eligible = unseen.length ? unseen : differentFromCurrent.length ? differentFromCurrent : scenarios;
+  return structuredClone(eligible[Math.floor(Math.random() * eligible.length)]);
+}
+
+const baseState = ({
+  carriedLifetimeEchoes = 0,
+  previousRecent = [],
+  avoidScenarioId = "",
+  shownTutorial = JSON.parse(localStorage.getItem(TUTORIAL_KEY) || "false"),
+} = {}) => {
+  const scenario = pickScenario(previousRecent, avoidScenarioId);
+  const recentScenarioIds = [scenario.id, ...previousRecent.filter((id) => id !== scenario.id)].slice(
+    0,
+    Math.max(1, scenarios.length - 1)
+  );
+
   return {
     scenario,
     currentNodeId: scenario.startNode,
+    recentScenarioIds,
     turn: 1,
     maxTurns: 8,
     health: 100,
     clue: 0,
     echoes: 0,
-    lifetimeEchoes: 0,
+    lifetimeEchoes: carriedLifetimeEchoes,
     pity: 0,
     over: false,
     storyBeat: "Your first move will decide who controls the next chapter.",
     discoveredIdentity: "",
     chronicle: ["A memory opens: you step into another real life."],
-    shownTutorial: JSON.parse(localStorage.getItem(TUTORIAL_KEY) || "false"),
+    shownTutorial,
     tipsSeen: {},
     stats: {
       curiosity: 0,
@@ -763,34 +783,57 @@ function loadGame() {
     state.chronicle.push("No save found in the archive.");
     return refresh();
   }
+
   state = JSON.parse(raw);
+
+  if (!Array.isArray(state.recentScenarioIds)) {
+    state.recentScenarioIds = state.scenario?.id ? [state.scenario.id] : [];
+  }
+  if (!state.storyBeat) {
+    state.storyBeat = "The timeline resumes from where you left it.";
+  }
+  if (!state.currentNodeId || !state.scenario?.nodes?.[state.currentNodeId]) {
+    state.currentNodeId = state.scenario.startNode;
+  }
+
   state.chronicle.push("Save loaded. The timeline reconnects.");
   refresh();
 }
 
-function startNewGame(resetMeta = false) {
-  const carriedEchoes = resetMeta ? 0 : state.lifetimeEchoes;
-  state = baseState();
-  state.lifetimeEchoes = carriedEchoes;
+function startNewGame({ resetMeta = false, carryMessage = "" } = {}) {
+  const prior = state;
+  state = baseState({
+    carriedLifetimeEchoes: resetMeta ? 0 : prior.lifetimeEchoes,
+    previousRecent: resetMeta ? [] : prior.recentScenarioIds || [],
+    avoidScenarioId: prior.scenario?.id || "",
+    shownTutorial: prior.shownTutorial,
+  });
+
+  if (carryMessage) {
+    state.chronicle.unshift(carryMessage);
+  }
+
   el.endScreen.classList.add("hidden");
   refresh();
 }
 
 document.getElementById("saveBtn").onclick = saveGame;
 document.getElementById("loadBtn").onclick = loadGame;
-document.getElementById("restartBtn").onclick = () => startNewGame(false);
-document.getElementById("newGameBtn").onclick = () => startNewGame(false);
-document.getElementById("continueRunBtn").onclick = () => {
-  const carried = state.lifetimeEchoes;
-  startNewGame(false);
-  state.lifetimeEchoes = carried;
-  state.chronicle.unshift("You carry your Echo Shards into another life.");
-  refresh();
-};
+document.getElementById("restartBtn").onclick = () => startNewGame({ resetMeta: false });
+document.getElementById("newGameBtn").onclick = () =>
+  startNewGame({
+    resetMeta: false,
+    carryMessage: "A new life begins in a different historical path.",
+  });
+document.getElementById("continueRunBtn").onclick = () =>
+  startNewGame({
+    resetMeta: false,
+    carryMessage: "Your Echo Shards persist as you continue the search across a new life.",
+  });
 document.getElementById("resetBtn").onclick = () => {
   localStorage.removeItem(STORAGE_KEY);
   localStorage.removeItem(TUTORIAL_KEY);
-  startNewGame(true);
+  startNewGame({ resetMeta: true, carryMessage: "All memories wiped. A completely fresh cycle starts." });
 };
 el.tutorialDismiss.onclick = dismissTip;
 
