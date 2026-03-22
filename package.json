@@ -1,0 +1,10 @@
+{
+  "name": "past-lifes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Text strategy simulator where choices reveal who you were in a past life.",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check app.js"
+  }
+}

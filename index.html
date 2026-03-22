@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Past Lifes</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <p class="eyebrow">Narrative Strategy Simulator</p>
+        <h1>Past Lifes</h1>
+        <p class="subtitle">
+          Every decision stirs an old memory. Chase the clues, earn Echo Shards,
+          and uncover the person you once were.
+        </p>
+      </header>
+
+      <section class="status-grid" id="statusGrid"></section>
+
+      <section class="scene-card" id="sceneCard">
+        <img id="sceneImage" alt="Scenario art" />
+        <div>
+          <p class="scene-kicker" id="sceneKicker"></p>
+          <h2 id="sceneTitle"></h2>
+          <p id="sceneText"></p>
+        </div>
+      </section>
+
+      <section class="story-beat" id="storyBeat"></section>
+
+      <section class="choices" id="choices"></section>
+
+      <section class="log-panel">
+        <h3>Chronicle</h3>
+        <ol id="chronicle"></ol>
+      </section>
+
+      <section class="end-screen hidden" id="endScreen">
+        <h2 id="endTitle"></h2>
+        <p id="endSummary"></p>
+        <article id="identityCard"></article>
+        <div class="end-actions">
+          <button id="continueRunBtn">Continue the Search</button>
+          <button id="newGameBtn">Begin a New Life</button>
+          <button id="resetBtn" class="secondary">Forget All Memories</button>
+        </div>
+      </section>
+
+      <footer class="app-footer">
+        <button id="saveBtn" class="secondary">Save Game</button>
+        <button id="loadBtn" class="secondary">Load Game</button>
+        <button id="restartBtn" class="secondary">Restart Run</button>
+      </footer>
+    </main>
+
+    <aside id="tutorialToast" class="tutorial-toast hidden" role="status" aria-live="polite">
+      <h4 id="tutorialTitle"></h4>
+      <p id="tutorialText"></p>
+      <button id="tutorialDismiss" class="secondary">Got it</button>
+    </aside>
+
+    <script src="app.js"></script>
+  </body>
+</html>
